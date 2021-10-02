@@ -1,0 +1,178 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import cv2 #OpenCV\n",
+    "import os\n",
+    "import time\n",
+    "import uuid"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "IMAGES_PATH = \"Tensorflow\\workspace\\images\\collectedimages\""
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "'C:\\\\Users\\\\Sahista\\\\Documents\\\\College\\\\Sem_3\\\\LinguaVox\\\\RealTimeObjectDetection'"
+      ]
+     },
+     "execution_count": 3,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "os.getcwd()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "labels = ['hello', 'thanks', 'yes', 'no']\n",
+    "number_imgs = 15"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Collecting images for hello\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\hello\\hello.7abf9e96-232c-11ec-a251-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\hello\\hello.7c9ce26c-232c-11ec-8bfc-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\hello\\hello.7e6ab5e5-232c-11ec-b132-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\hello\\hello.8038c9ea-232c-11ec-92de-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\hello\\hello.820667b9-232c-11ec-9ca7-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\hello\\hello.83d43340-232c-11ec-afd0-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\hello\\hello.85a091f0-232c-11ec-ac2b-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\hello\\hello.876ca0d8-232c-11ec-864c-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\hello\\hello.893906ce-232c-11ec-9cab-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\hello\\hello.8b059cd3-232c-11ec-a51e-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\hello\\hello.8cd17a92-232c-11ec-ad89-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\hello\\hello.8e9edad6-232c-11ec-a00d-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\hello\\hello.906c17e8-232c-11ec-ab91-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\hello\\hello.923778f6-232c-11ec-9419-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\hello\\hello.94065968-232c-11ec-9566-18473d1a2b80.jpg\n",
+      "Collecting images for thanks\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\thanks\\thanks.9c4f0dc4-232c-11ec-a6c8-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\thanks\\thanks.9e1fc4af-232c-11ec-bf63-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\thanks\\thanks.9fec1193-232c-11ec-b3c9-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\thanks\\thanks.a1b75fc5-232c-11ec-9e82-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\thanks\\thanks.a385c8e8-232c-11ec-9281-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\thanks\\thanks.a5536d1a-232c-11ec-a73c-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\thanks\\thanks.a722b43b-232c-11ec-8345-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\thanks\\thanks.a8eee6f2-232c-11ec-8613-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\thanks\\thanks.aabcab9f-232c-11ec-b4bb-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\thanks\\thanks.ac89e1a1-232c-11ec-9ffd-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\thanks\\thanks.ae56875c-232c-11ec-bf43-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\thanks\\thanks.b023c19e-232c-11ec-9ec5-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\thanks\\thanks.b1f00edb-232c-11ec-a346-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\thanks\\thanks.b3bc1214-232c-11ec-a40b-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\thanks\\thanks.b5879e9f-232c-11ec-9c0c-18473d1a2b80.jpg\n",
+      "Collecting images for yes\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\yes\\yes.bdd4f33e-232c-11ec-854b-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\yes\\yes.bfa53849-232c-11ec-aed6-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\yes\\yes.c17387b0-232c-11ec-8366-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\yes\\yes.c33f6ae3-232c-11ec-9757-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\yes\\yes.c50e66ff-232c-11ec-83a3-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\yes\\yes.c6daa348-232c-11ec-8ff1-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\yes\\yes.c8a620d8-232c-11ec-8eb8-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\yes\\yes.ca73b3c9-232c-11ec-9ff7-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\yes\\yes.cc40c24d-232c-11ec-b004-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\yes\\yes.ce0e1a31-232c-11ec-b72f-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\yes\\yes.cfdb7952-232c-11ec-a7d6-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\yes\\yes.d1a94f53-232c-11ec-a259-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\yes\\yes.d376a7ec-232c-11ec-a155-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\yes\\yes.d543c4cc-232c-11ec-81ee-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\yes\\yes.d70f6990-232c-11ec-badf-18473d1a2b80.jpg\n",
+      "Collecting images for no\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\no\\no.df810a4f-232c-11ec-927e-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\no\\no.e1509c7a-232c-11ec-aa83-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\no\\no.e31e810b-232c-11ec-87de-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\no\\no.e4ec116f-232c-11ec-975b-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\no\\no.e6bafc8d-232c-11ec-b4f7-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\no\\no.e88a8160-232c-11ec-88b1-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\no\\no.ea5799e6-232c-11ec-b555-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\no\\no.ec23f46f-232c-11ec-8b3d-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\no\\no.edf1a30e-232c-11ec-a26c-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\no\\no.efbd5117-232c-11ec-8e97-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\no\\no.f18a0b3e-232c-11ec-a609-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\no\\no.f3599b9d-232c-11ec-84e7-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\no\\no.f5284ab5-232c-11ec-8fb2-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\no\\no.f6f6d659-232c-11ec-af85-18473d1a2b80.jpg\n",
+      "Tensorflow\\workspace\\images\\collectedimages\\no\\no.f8c4aea2-232c-11ec-95a6-18473d1a2b80.jpg\n"
+     ]
+    }
+   ],
+   "source": [
+    "for label in labels:\n",
+    "    !mkdir = {'Tensorflow\\workspace\\images\\collectedimages\\\\'+label}\n",
+    "    cap = cv2.VideoCapture(0)\n",
+    "    print('Collecting images for {}'.format(label))\n",
+    "    time.sleep(5)\n",
+    "    for imgnum in range(number_imgs):\n",
+    "        ret, frame = cap.read()\n",
+    "        imgname = os.path.join(IMAGES_PATH, label, label+'.'+'{}.jpg'.format(str(uuid.uuid1())))\n",
+    "        print(imgname)\n",
+    "        cv2.imwrite(imgname, frame)\n",
+    "        cv2.imshow('frame', frame)\n",
+    "        time.sleep(3)\n",
+    "        \n",
+    "        if cv2.waitKey(1) & 0xFF == ord('q'):\n",
+    "            break\n",
+    "    cap.release()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.8.5"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}
