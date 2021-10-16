@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'LinguaVox'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A969DF93683440269078A7EACED1AB52 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_BD1203033B3B45A08276FF79A625B45F }}
